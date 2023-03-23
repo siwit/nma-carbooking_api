@@ -1,4 +1,4 @@
-// import { DateTime } from 'luxon'
+import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class CarBookingModel extends BaseModel {
@@ -12,5 +12,8 @@ export default class CarBookingModel extends BaseModel {
 
   @column()
   public startdate: Date
+
+  @column.dateTime({type:'timestamp'})
+  public starttime
   
 }
