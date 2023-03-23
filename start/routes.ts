@@ -22,7 +22,9 @@ import Route from '@ioc:Adonis/Core/Route'
 import CarBookingRoutes  from './routes/carBookingListsRoutes'
 
 Route.get('/', async () => {
+  
   return { hello: 'world' }
+
 })
 
 CarBookingRoutes()
