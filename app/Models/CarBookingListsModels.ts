@@ -17,7 +17,7 @@ export default class CarBookingModel extends BaseModel {
   @column()
   public enddate: Date
   @column()
-  public endtime: Date
+  public endtime: time
 
 
   
