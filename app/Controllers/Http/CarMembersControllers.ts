@@ -7,4 +7,10 @@ export default class CarMemberController {
         const carMemberList = await CarMemberLists.all()
         return response.ok(carMemberList)
     }
+    public async getCarMemberById({params,response}:HttpContextContract){
+        const carMemberList = await CarMemberLists.findBy('id',params.id)
+        return response.ok(carMemberList)
+    }
+
+
 }
