@@ -62,16 +62,19 @@ export default class CarBookingModel extends BaseModel {
   public length: number
 
   @column()
-  public driver_id: string
+  public personnel_driver: string
+
+  @column()
+  public personnel_manager: string
+
+  @column()
+  public personnel_director: string
 
   @column()
   public startmileage: number
 
   @column()
   public endmileage: number
-
-  @column()
-  public priority: string
 
   @column.dateTime()
   public lastupdate: DateTime
