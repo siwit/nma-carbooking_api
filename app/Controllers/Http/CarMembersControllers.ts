@@ -4,7 +4,7 @@ const fs = require('fs/promises');
 
 export default class CarMemberController {
 
-    public async getCarMemberList({response}:HttpContextContract){
+    public async getCarMemberList({response}: HttpContextContract){
        
         try {
             const carMemberList = await CarMemberLists.all()   
@@ -17,6 +17,7 @@ export default class CarMemberController {
             jsonData.push(
                 {
                     hospcode: carMemberList[i].hospcode,
+                    car_id: carMemberList[i].car_id,
                     car_number: carMemberList[i].car_number,
                     model: carMemberList[i].model,
                     brand: carMemberList[i].brand,
@@ -31,7 +32,8 @@ export default class CarMemberController {
             )
             }
 
-            return response.status(200).json({ ok: true, results: carMemberList, code: 200 })
+            // return response.ok(jsonData)
+            return response.status(200).json({ ok: true, results: jsonData, code: 200 })
         } catch (error) {
             return response.status(500).json({ ok: false, error: 'Internal Server Error', code: 500 })
         }
@@ -61,7 +63,7 @@ export default class CarMemberController {
             )
             }
 
-            return response.status(200).json({ ok: true, results: carMemberList, code: 200 })
+            return response.status(200).json({ ok: true, results: jsonData, code: 200 })
         } catch (error) {
             return response.status(500).json({ ok: false, error: 'Internal Server Error', code: 500 })
         }
