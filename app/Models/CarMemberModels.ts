@@ -5,13 +5,13 @@ export default class CarMemberModel extends BaseModel {
 
   public static table = 'car_member'
   @column({ isPrimary: true })
-  public id: number
+  public car_id: number
 
   @column({ isPrimary: true })
   public hospcode: string
 
   @column()
-  public number: string
+  public car_number: string
 
   @column()
   public model: string
@@ -35,7 +35,10 @@ export default class CarMemberModel extends BaseModel {
   public detail: string
 
   @column()
-  public img: any
+  public car_img : Blob | null 
+
+  @column()
+  public color_label : string
 
   @column()
   public active: string
