@@ -45,7 +45,7 @@ export default class CarMemberController {
             const carMemberList = await CarMemberLists //.findBy('car_id',params.id)      
             .query()
             .where({ car_id: params.id})
-            .select('hospcode', 'car_number', 'regist_num', 'car_id','car_img')
+            .select('hospcode', 'car_id', 'car_number', 'regist_num', 'detail', 'year', 'active','car_img')
 
         var image;
         let jsonData: any = [];
@@ -55,9 +55,16 @@ export default class CarMemberController {
             jsonData.push(
                 {
                     hospcode: carMemberList[i].hospcode,
-                    car_number: carMemberList[i].car_number,
-                    regist_num: carMemberList[i].regist_num,
                     car_id: carMemberList[i].car_id,
+                    car_number: carMemberList[i].car_number,
+                    model: carMemberList[i].model,
+                    brand: carMemberList[i].brand,
+                    color: carMemberList[i].color,
+                    year: carMemberList[i].year,
+                    type_id: carMemberList[i].type_id,
+                    regist_num: carMemberList[i].regist_num,
+                    detail: carMemberList[i].detail,
+                    active: carMemberList[i].active,
                     car_img: carMemberList[i].car_img == null? 'NA': Buffer.from(image,).toString('base64')
                 }
             )
