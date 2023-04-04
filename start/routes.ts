@@ -22,6 +22,9 @@ import Route from '@ioc:Adonis/Core/Route'
 import CarBookingRoutes  from './routes/carBookingListsRoutes'
 import CarPersonnelRoutes  from './routes/CarPersonnelsRoutes'
 import CarMemberRoutes from './routes/CarMemberRoutes'
+import CarDashBoardRoutes from './routes/CarDashboardRoutes'
+
+
 
 
 Route.get('/', async () => {
@@ -33,3 +36,5 @@ Route.get('/', async () => {
 CarBookingRoutes()
 CarPersonnelRoutes()
 CarMemberRoutes()
+CarDashBoardRoutes()
+
