@@ -7,12 +7,13 @@ export default function CarMemberRoutes(){
     
     Route.get('carmember/getCarMemberList',carMembersController.getCarMemberList)
 
-    Route.get('carmember/getCarMemberById/:id',carMembersController.getCarMemberById)
+    Route.get('carmember/getCarMemberById/:car_id',carMembersController.getCarMemberById)
 
     Route.post('carmember/postCarMember', carMembersController.postCarMember)
 
-    Route.post('carmember/deleteCarMember/:id', carMembersController.deleteCarMember)
+    Route.patch('carmember/editCarMember', carMembersController.editCarMember)
 
+    Route.delete('carmember/deleteCarMember', carMembersController.deleteCarMember)
 }
 
 

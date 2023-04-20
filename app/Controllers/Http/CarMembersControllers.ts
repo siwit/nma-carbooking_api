@@ -92,35 +92,57 @@ export default class CarMemberController {
                 return response.status(500).json({ok:false,error:'Internal Server Error',code:500})
             }
     }
- 
-    public async deleteCarMember({ response, params}: HttpContextContract){
-
-        const carmember = await CarMemberLists.findBy('car_id', params.id)
-        
-        try {
-            carmember?.delete()
-            return response.status(200).json({ok:true,message: 'Delete CarMember : '+ carmember?.car_number+' Success ',code:200})
-        } catch (error) {
-            return response.status(500).json({ok:false,error:'Internal Server Error',code:500})
-        }
-    }
-
+    
     public async editCarMember({ request, response }: HttpContextContract) {
 
-        const carmember = await CarMemberLists.findOrFail(request.input('car_id'))
+        const carmember = await CarMemberLists//.findOrFail(request.input('car_id'))
 
-        const data = request.only(['hospcode', 'car_number', 'model', 'brand', 'color', 'year', 'type_id', 'regist_num', 'detail', 'active'])
+        // const data = request.only(['hospcode', 'car_number', 'car_id'])
 
-        let image = request.file('car_img') == undefined ? null :  request.file('car_img');
+        // let image = request.file('car_img') == undefined ? null :  request.file('car_img');
+
+        const hospcode = request.input('hospcode')
+        const car_id = request.input('car_id')
+        const car_number = request.input('car_number')
+        const model = request.input('model')
+        const brand = request.input('brand')
+        const color = request.input('color')
+        const year = request.input('year')
+        const type_id = request.input('type_id')
+        const regist_num = request.input('regist_num')
+        const detail = request.input('detail')
+        const active = request.input('active')
+
+        await carmember
+        .query()
+        .where({hospcode: hospcode, car_id: car_id})
+        .update({car_number: car_number, model: model, brand: brand, color: color, year: year,type_id: type_id, regist_num: regist_num,detail: detail, active: active})
 
        try {
-        const buffer = await fs.readFile(image?.tmpPath)
-        carmember.car_img = buffer == null ? null : buffer
-        carmember?.merge(data).save()
-         return response.status(200).json({ok:true,message: 'Edit CarMember : '+request.input('car_number')+' Success ',code:200})
+        // const buffer = await fs.readFile(image?.tmpPath)
+        // carmember.car_img = buffer == null ? null : buffer
+        // carmember?.merge(data).save()
+         return response.status(200).json({ok:true,message: 'Edit CarMember : '+request.input('hospcode')+'-'+request.input('car_id')+' Success ',code:200})
      } catch (error) {
          return response.status(500).json({ok:false,error:'Internal Server Error',code:500})
      }
     }
 
+    public async deleteCarMember({ request, response}: HttpContextContract){
+
+        const hospcode = request.input('hospcode')
+        const car_id = request.input('car_id')
+        const carmember = CarMemberLists
+
+        await carmember
+        .query()
+        .where({hospcode: hospcode, car_id: car_id})
+        .delete()
+
+        try {
+            return response.status(200).json({ok:true,message: 'Delete CarMember : '+ hospcode +'-'+ car_id +' Success ',code:200})
+        } catch (error) {
+            return response.status(500).json({ok:false,error:'Internal Server Error',code:500})
+        }
+    }
 }
